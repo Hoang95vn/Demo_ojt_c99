@@ -44,12 +44,18 @@ public class ExpneseController {
 
 	@PostMapping(value = "/expenses")
 	public ResponseEntity<ExpenseDTO> createExpense(@RequestBody ExpenseDTO expenseDTO) {
+		if (expenseDTO == null)
+			throw new IllegalArgumentException("Create new Expense fail because the input expense is null!");
 		ExpenseDTO result = expenseService.saveOrUpdate(expenseDTO);
 		return ResponseEntity.ok(result);
 	}
 
 	@PutMapping(value = "/expenses")
 	public ResponseEntity<ExpenseDTO> updateExpense(@RequestBody ExpenseDTO expenseDTO) {
+		if (expenseDTO == null)
+			throw new IllegalArgumentException("Update Expense fail because the input expense is null!");
+		if (expenseDTO.getId() == null)
+			throw new IllegalArgumentException("Update Expense fail because the input expense is null!");
 		ExpenseDTO result = expenseService.saveOrUpdate(expenseDTO);
 		return ResponseEntity.ok(result);
 	}

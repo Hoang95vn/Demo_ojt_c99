@@ -22,19 +22,14 @@ public class ExpenseServiceImpl implements IExpenseService {
 
 	@Override
 	public ExpenseDTO saveOrUpdate(ExpenseDTO object) {
-		try {
-			ExpenseEntity entity = expenseRepository.save(IExpenseMapper.INSTANCE.convertToEntity(object));
-			return IExpenseMapper.INSTANCE.convertToDTO(entity);
-		} catch (IllegalArgumentException e) {
-			if (object.getId() == 0)
-				throw new IllegalArgumentException("Update Expense fail because the input expense is null!");
-			throw new IllegalArgumentException("Create new Expense fail because the input expense is null!");
-		}
+		ExpenseEntity entity = expenseRepository.save(IExpenseMapper.INSTANCE.convertToEntity(object));
+		return IExpenseMapper.INSTANCE.convertToDTO(entity);
+
 	}
 
 	@Override
-	public ExpenseDTO getById(long id) {
-		if (id == 0)
+	public ExpenseDTO getById(Long id) {
+		if (id == null)
 			throw new IllegalArgumentException("id is null");
 		try {
 			return IExpenseMapper.INSTANCE.convertToDTO(expenseRepository.getById(id));
@@ -49,7 +44,7 @@ public class ExpenseServiceImpl implements IExpenseService {
 	}
 
 	@Override
-	public boolean deleteById(long id) {
+	public boolean deleteById(Long id) {
 		try {
 			expenseRepository.deleteById(id);
 			return true;

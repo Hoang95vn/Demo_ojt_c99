@@ -6,9 +6,9 @@ public interface IApiService<T> {
 
 	public T saveOrUpdate(T object);
 
-	public T getById(long id);
+	public T getById(Long id);
 
 	public List<T> getAll();
 
-	public boolean deleteById(long id);
+	public boolean deleteById(Long id);
 }

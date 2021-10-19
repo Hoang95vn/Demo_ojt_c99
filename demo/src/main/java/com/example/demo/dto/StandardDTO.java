@@ -6,5 +6,5 @@ import lombok.Setter;
 @Setter
 @Getter
 public class StandardDTO {
-	private long id;
+	private Long id;
 }
